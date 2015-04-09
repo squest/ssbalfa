@@ -1,11 +1,13 @@
 (ns ssbone.handler
-  (:require [compojure.core :refer :all]
-            [compojure.route :as route]
-            [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
-
-(defroutes app-routes
-  (GET "/" [] "Hello World")
-  (route/not-found "Not Found"))
+  (:require
+    [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
+    [compojure.core :refer [routes]]
+    [ssbone.routes :refer :all]))
 
 (def app
-  (wrap-defaults app-routes site-defaults))
+  (-> (routes app-routes)
+      (wrap-defaults site-defaults)))
+
+
+
+
